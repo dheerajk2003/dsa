@@ -44,6 +44,27 @@ void printAll(struct node * ll){
 		ptr = ptr->next;
 	}while(ptr != NULL);
 }
+
+void del(struct node * ll, int item){
+	struct node * ptr = ll;
+	struct node * temp = ptr;
+	while(ptr != NULL){
+		if(item == ptr->data){
+			break;
+		}
+		temp = ptr;
+		ptr = ptr->next;
+	}
+	if(ptr != NULL){
+		temp->next = ptr->next;
+		free(ptr);
+	}
+	else{
+		while(temp->next != NULL){
+			temp = temp->next;
+		}
+	}
+}
 int main(){
 	struct node* ll=(struct node *) malloc (sizeof(struct node));
 	ll->data = 10;
@@ -51,6 +72,7 @@ int main(){
 	append(ll,20);
 	append(ll,30);
 	insert(ll,3,25);
+  	del(ll,20);
 	printAll(ll);
 	search(ll,20);
 	return 0;
