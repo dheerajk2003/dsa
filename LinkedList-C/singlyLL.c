@@ -1,10 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node{
+typedef struct node{
 	int data;
 	struct node * next;
-};
+} nod;
 
 void append(struct node * ll, int data){
 	struct node * newNode = (struct node *) malloc (sizeof(struct node));
@@ -40,7 +40,7 @@ void insert(struct node * ll, int pos, int data){
 void printAll(struct node * ll){
 	struct node * ptr = ll;
 	do{
-		printf("%d \n",ptr->data);
+		printf("printing all %d \n",ptr->data);
 		ptr = ptr->next;
 	}while(ptr != NULL);
 }
@@ -64,16 +64,4 @@ void del(struct node * ll, int item){
 			temp = temp->next;
 		}
 	}
-}
-int main(){
-	struct node* ll=(struct node *) malloc (sizeof(struct node));
-	ll->data = 10;
-	ll->next = NULL;
-	append(ll,20);
-	append(ll,30);
-	insert(ll,3,25);
-  	del(ll,20);
-	printAll(ll);
-	search(ll,20);
-	return 0;
 }
