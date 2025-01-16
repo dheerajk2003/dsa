@@ -60,8 +60,7 @@ void del(struct node * ll, int item){
 		free(ptr);
 	}
 	else{
-		while(temp->next != NULL){
-			temp = temp->next;
-		}
+		printf("Item not found \n");
+    break;
 	}
 }
