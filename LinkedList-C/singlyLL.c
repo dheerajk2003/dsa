@@ -61,6 +61,5 @@ void del(struct node * ll, int item){
 	}
 	else{
 		printf("Item not found \n");
-    break;
 	}
 }
