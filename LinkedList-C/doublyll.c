@@ -100,7 +100,6 @@ void deleteAny(node **head){
         if(p == *head)
             *head = p->next;
         else{
-            printf("p prev next %d \n ", p->prev);
             (p->prev)->next = (p->next);
         }
         printf("\n now freeing \n");
