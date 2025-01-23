@@ -8,6 +8,8 @@ typedef struct node{
 } node;
 
 void append(node **);
+void insertAfter(node**);
+void deleteAny(node **);
 void countNode(node*);
 void display(node*);
 void search(node*);
@@ -16,11 +18,19 @@ int main(){
     int ch;
     node * start;
     while(1){
-    printf("1) append \n 2)  \n 3)  \n 4) count node \n 5) search \n 6) display");
+    printf("1) append \n 2) insert after \n 3)  \n 4) count node \n 5) search \n 6) display");
     scanf("%d", &ch);
     switch (ch) {
         case 1:
             append(&start);
+            break;
+
+        case 2: 
+            insertAfter(&start);
+            break;
+
+        case 3:
+            deleteAny(&start);
             break;
 
         case 4:
@@ -52,8 +62,50 @@ void append(node ** head){
     while(p->next != NULL){
         p=p->next;
     }
+    temp->prev = p;
     p->next = temp;
 
+}
+
+void insertAfter(node **head){
+    int pos;
+    node * p = *head;
+    printf("Enter after which value you want to insert : ");
+    scanf("%d", &pos);
+    while(p != NULL && p->data != pos)
+        p = p->next;
+    if(p == NULL)
+        printf("value not found \n ");
+    else {
+        int data;
+        printf("Enter value to insert : ");
+        scanf("%d", &data);
+        node * temp = (node *) malloc (sizeof(node));
+        temp->data = data;
+        temp->next = p->next;
+        p->next = temp;
+    }
+}
+
+void deleteAny(node **head){
+    node *p = *head;
+    int val;
+    printf("Enter the value that you want to insert : ");
+    scanf("%d", &val);
+    while(p != NULL && p->data != val)
+        p = p->next;
+    if(p == NULL)
+        printf("value not found \n ");
+    else {
+        if(p == *head)
+            *head = p->next;
+        else{
+            printf("p prev next %d \n ", p->prev);
+            (p->prev)->next = (p->next);
+        }
+        printf("\n now freeing \n");
+        free(p);
+    }
 }
 
 
@@ -103,7 +155,7 @@ void display(node * head){
     }
     printf(" \n");
     while(ptr != NULL){
-        printf("%d \n", ptr->data);
+        printf("-- %d \n", ptr->data);
         ptr = ptr->next;
     }
 }
