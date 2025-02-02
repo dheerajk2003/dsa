@@ -157,4 +157,5 @@ void display(node * head){
         printf("-- %d \n", ptr->data);
         ptr = ptr->next;
     }
-}
+    
+}  
