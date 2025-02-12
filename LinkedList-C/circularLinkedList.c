@@ -3,9 +3,62 @@
 
 typedef struct node {
     int data;
-    struct node * prev;
     struct node * next;
 } node;
+
+void createList(node **);
+void insertAtAny(node **);
+void insertBeg(node **);
+void delFromBeg(node **);
+void delAny(node **);
+void search(node *);
+void countNode(node *);
+void display(node *);
+int main(){
+    node * start = NULL;
+    int ch;
+    while(1){
+        printf("\n 1 -> Append \n 2 -> Insert at any \n 3 -> Insert At Beg \n 4 -> Delete from Beg \n 5 -> Delete At Any \n 6 -> Search \n 7 -> Count \n 8 -> Display \n -> Exit \n");
+        scanf("%d", &ch);
+        switch(ch){
+            case 1:
+                createList(&start);
+                break;
+
+            case 2:
+                insertAtAny(&start);
+                break;
+
+            case 3:
+                insertBeg(&start);
+                break;
+
+            case 4:
+                delFromBeg(&start);
+                break;
+
+            case 5: 
+                delAny(&start);
+                break;
+
+            case 6:
+                search(start);
+                break;
+
+            case 7:
+                countNode(start);
+                break;
+                
+            case 8:
+                display(start);
+                break;
+
+            default:
+                exit(1);
+        }
+    }
+    return 0;
+}
 
 void createList(node ** head){
     node * ptr = *head, * temp = (node *) malloc (sizeof(node));
@@ -38,19 +91,13 @@ void insertAtAny(node ** head){
     }
 
     while(ptr->next != *head){
-        if(ptr->data == data){
-           printf("Enter the data that you want to insert : ");
-           scanf("%d", &data);
-           temp = (node *) malloc (sizeof(node));
-           temp->data = data;
-           temp->next = ptr->next;
-           ptr->next = temp;
+        if(ptr->data == pos){
            break;
         }
         ptr = ptr->next;
     }
     
-    if((ptr)->data == pos){
+    if(ptr->data == pos){
                 
         printf("Enter the data that you want to insert : ");
         scanf("%d", &data);
@@ -60,7 +107,7 @@ void insertAtAny(node ** head){
         ptr->next = temp;
         return;
     }
-    else if(ptr->data != data)
+    else
         printf("Data not found \n");
 }
 
@@ -178,50 +225,4 @@ void display(node * head){
         ptr = ptr->next;
     }
     printf("%d \n ", ptr->data);
-}
-
-int main(){
-    node * start = NULL;
-    int ch;
-    while(1){
-        printf("\n 1 -> Append \n 2 -> Insert at any \n 3 -> Insert At Beg \n 4 -> Delete from Beg \n 5 -> Delete At Any \n 6 -> Search \n 7 -> Count \n 8 -> Display \n -> Exit \n");
-        scanf("%d", &ch);
-        switch(ch){
-            case 1:
-                createList(&start);
-                break;
-
-            case 2:
-                insertAtAny(&start);
-                break;
-
-            case 3:
-                insertBeg(&start);
-                break;
-
-            case 4:
-                delFromBeg(&start);
-                break;
-
-            case 5: 
-                delAny(&start);
-                break;
-
-            case 6:
-                search(start);
-                break;
-
-            case 7:
-                countNode(start);
-                break;
-                
-            case 8:
-                display(start);
-                break;
-
-            default:
-                exit(1);
-        }
-    }
-    return 0;
 }
