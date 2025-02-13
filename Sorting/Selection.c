@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
 #define max 5
 void main(){
     int i, j, t;
