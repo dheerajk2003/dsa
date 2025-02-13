@@ -1,9 +1,18 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
 class Codec {
     String ms="";
     public void prefix(TreeNode root){
         if(root == null)
             return;
-        ms = ms+ Integer.toString(root.val) + "-";
+        ms = ms+ Integer.toString(root.val) + ":";
         prefix(root.left);
         prefix(root.right);
     }
@@ -11,12 +20,14 @@ class Codec {
         if(root == null)
             return;
         infix(root.left);
-        ms = ms+ Integer.toString(root.val) + "-";
+        ms = ms+ Integer.toString(root.val) + ":";
         infix(root.right);
     }
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
+        if(root == null)
+            return "";
         String str;
         prefix(root);
         str = ms;
@@ -44,41 +55,17 @@ class Codec {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
+        if(data.equals(""))
+            return null;
         String[] str = data.split(",");
-        String[] first = str[0].split("-");
-        String[] second = str[1].split("-");
-
+        String[] first = str[0].split(":");
+        String[] second = str[1].split(":");
+        l=0;
         return bt(first,second, 0,second.length-1);
     }
 }
 
- class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
-
-public class SerDesTree {
-    public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(5);
-        root.right.left = new TreeNode(6);
-        Codec c = new Codec();
-        String str = c.serialize(root);
-        TreeNode nd = c.deserialize(str);
-        str = "";
-        c.ms = "";
-        c.prefix(nd);
-        System.out.println(c.ms);
-    }
-}
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// TreeNode ans = deser.deserialize(ser.serialize(root));
