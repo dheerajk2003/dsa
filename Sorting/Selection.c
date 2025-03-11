@@ -1,6 +1,6 @@
 #include<stdio.h>
 #define max 5
-void main(){
+int main(){
     int i, j, t;
 
     int arr[max];
@@ -24,4 +24,5 @@ void main(){
     for(i=0;i<max;i++){
         printf("%d, ", arr[i]);
     }
+    return 0;
 }
