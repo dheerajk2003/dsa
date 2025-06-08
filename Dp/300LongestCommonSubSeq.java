@@ -17,4 +17,4 @@ class Solution {
     }
 }
 
-// this question is done by matching the j to i if its less than put max dp[i] , dp[j+1]
+// in this we calculate how many smaller numbers does a number have before it, for this we use nested loop, and we use this precomputation to calculate longest increasing substring
